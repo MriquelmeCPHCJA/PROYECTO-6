@@ -6,6 +6,8 @@ const {
     updateUserById  
 } = require('../controllers/UserController');
 
+const auth = require('../middleware/authorization');
+
 const userRoutes = express.Router();
 
 userRoutes.post('/register', createUser); // localhost:3001/api/users/create-user
