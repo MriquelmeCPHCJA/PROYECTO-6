@@ -9,14 +9,14 @@ const {
 
 const productRoutes = express.Router();
 
-productRoutes.post('/create-product', createProduct); // localhost:3001/api/products/create-product
+productRoutes.post('/create-product', createProduct); // localhost:3000/api/products/create-product
 
-productRoutes.get('/all-products', getAllProducts); // localhost:3001/api/products/all-products
+productRoutes.get('/all-products', getAllProducts); // localhost:3000/api/products/all-products
 
-productRoutes.get('/product/:id', getProductById); // localhost:3001/api/products/product/:id
+productRoutes.get('/product/:id', getProductById); // localhost:3000/api/products/product/:id
 
-productRoutes.put('/update-product/:id', updateProductById); // localhost:3001/api/products/update-product/:id
+productRoutes.put('/update-product/:id', updateProductById); // localhost:3000/api/products/update-product/:id
 
-productRoutes.delete('/delete-product/:id', deleteProductById); // localhost:3001/api/products/delete-product/:id
+productRoutes.delete('/delete-product/:id', deleteProductById); // localhost:3000/api/products/delete-product/:id
 
 module.exports = productRoutes;
