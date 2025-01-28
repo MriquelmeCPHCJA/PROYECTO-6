@@ -5,7 +5,9 @@ const User = require('../models/User');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DB_URI)
+        await mongoose.connect(process.env.DB_URI) // Configuración de la conexión a la base de datos
+
+        // Inicialización de los modelos de colecciones
         await CategoryProducts.init()
         await Product.init()
         await User.init()
