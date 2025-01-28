@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
         let [type, token] = authorization.split(" ");
         
         if (type === 'Bearer' || type === 'Token') {
-            const openToken = jwt.verify(token, process.env.SECRET);
+            const openToken = jwt.verify(token, process.env.SECRET_KEY);
             req.user = openToken.user
             // console.log('User authenticated:', openToken.user);
             // console.log(req.user);

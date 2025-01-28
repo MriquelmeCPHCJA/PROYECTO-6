@@ -48,7 +48,7 @@ exports.loginUser = async (req, res) => {
 
         jwt.sign(
             payload,
-            process.env.SECRET,
+            process.env.SECRET_KEY,
             {
                 expiresIn: '1m',
             },
