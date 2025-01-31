@@ -87,3 +87,24 @@ exports.updateUserById = async (req, res) => {
         res.status(400).json({ message: 'Hubo un error al actualizar el usuario'  })
     }
 }
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({}).select('-password');
+        res.json({users});
+    } catch (error) {
+        res.status(500).json({message: 'Hubo un error al obtener los usuarios'});
+    }
+}
+
+exports.deleteUserById = async (req, res) => {
+    try {
+        const idUser = req.params.id
+
+        await User.findByIdAndDelete(idUser)
+
+        res.json({ message: 'Usuario eliminado' })
+    } catch (error) {
+        res.status(400).json({ message: 'Hubo un error al eliminar el usuario' })
+    }
+}
