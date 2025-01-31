@@ -5,6 +5,8 @@ exports.createProduct = async (req, res) => {
 
         const product = req.body;
 
+        if (!product.categoryProduct) throw new Error('Debe seleccionar una categoría');
+
         const newProduct = await Product.create(product);
 
         res.json(newProduct);
