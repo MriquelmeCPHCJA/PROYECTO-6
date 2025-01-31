@@ -3,29 +3,29 @@ const mongoose = require('mongoose');
 const UserSchema = mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: function(){return this.isNew},
         trim: true,
         unique: true
     },
     email: {
         type: String,
-        required: true,
+        required: function(){return this.isNew},
         trim: true,
         unique: true
     },
     password: {
         type: String,
-        required: true,
+        required: function(){return this.isNew},
         trim: true
     },
     nameUser: [ {
         type: String,
-        required: true,
+        required: function(){return this.isNew},
         trim: true
     }, 
     {
         type: String,
-        required: true,
+        required: function(){return this.isNew},
         trim: true
     }],
     addressUser: [ { 
@@ -45,7 +45,7 @@ const UserSchema = mongoose.Schema({
     } ],
     phoneUser: [{ 
         type: Number, 
-        required: true
+        required: function(){return this.isNew},
     }, 
     { 
         type: Number 
