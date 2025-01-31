@@ -2,19 +2,14 @@ const Category = require('../models/CategoryProducts');
 
 exports.createCategoryProduct = async (req, res) => {
     try {
-        const { 
-            name,
-            description
-        } = req.body;
+        const categoy = req.body
 
-        const newCategory = await Category.create({
-            name,
-            description
-        });
+        const newCategory = await Category.create(categoy);
 
         res.json(newCategory);
     } catch (error) {
-        res.status(500).json({message: 'Hubo un error al crear la Categoria de Producto'});
+        res.status(500).json({
+            message: 'Hubo un error al crear la Categoria de Producto', error});
     }
 }
 
@@ -41,21 +36,10 @@ exports.getCategoryProductById = async (req, res) => {
 exports.updateCategoryProductById = async (req, res) => {
     try {
         const idCategory = req.params.id;
-        const { 
-            name,
-            description
-        } = req.body;
 
-        const updatedCategory = await Category.findByIdAndUpdate(
-            idCategory, 
-            { 
-                name,
-                description
-            }, 
-            { 
-                new: true 
-            }
-        );
+        const category = req.body;
+
+        const updatedCategory = await Category.findByIdAndUpdate(idCategory, category, {new: true});
         
         res.json({updatedCategory});
     } catch (error) {

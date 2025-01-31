@@ -44,8 +44,7 @@ const UserSchema = mongoose.Schema({
         type: String 
     } ],
     phoneUser: [{ 
-        type: Number, 
-        required: function(){return this.isNew},
+        type: Number
     }, 
     { 
         type: Number 

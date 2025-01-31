@@ -2,25 +2,14 @@ const Product = require('../models/Product');
 
 exports.createProduct = async (req, res) => {
     try {
-        const { 
-            nameProduct, 
-            priceProduct, 
-            quantityProduct, 
-            descriptionProduct, 
-            categoryProduct 
-        } = req.body;
 
-        const newProduct = await Product.create({
-            nameProduct, 
-            priceProduct, 
-            quantityProduct, 
-            descriptionProduct, 
-            categoryProduct
-        });
+        const product = req.body;
+
+        const newProduct = await Product.create(product);
 
         res.json(newProduct);
     } catch (error) {
-        res.status(500).json({message: 'Hubo un error al crear el producto'});
+        res.status(500).json({message: error.message});
     }
 }
 
@@ -47,27 +36,9 @@ exports.getProductById = async (req, res) => {
 exports.updateProductById = async (req, res) => {
     try {
         const idProducto = req.params.id;
-        const { 
-            nameProduct, 
-            priceProduct, 
-            quantityProduct, 
-            descriptionProduct, 
-            categoryProduct  
-        } = req.body;
 
-        const updatedProduct = await Product.findByIdAndUpdate(
-            idProducto, 
-            { 
-                nameProduct, 
-                priceProduct, 
-                quantityProduct, 
-                descriptionProduct, 
-                categoryProduct 
-            }, 
-            { 
-                new: true 
-            }
-        ).populate('categoryProduct');
+        const product =  req.body;
+        const updatedProduct = await Product.findByIdAndUpdate(idProducto, product, { new: true }).populate('categoryProduct');
         
         res.json({updatedProduct});
     } catch (error) {

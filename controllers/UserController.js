@@ -17,33 +17,7 @@ exports.createUser = async (req, res) => {
         const newUser = await User.create(user)
 
         res.status(201).json({ newUser })
-
-        // const { 
-        //     username, 
-        //     email, 
-        //     password, 
-        //     nameUser, 
-        //     addressUser, 
-        //     phoneUser 
-        // } = req.body
-
-        // const salt = await bcryptjs.genSalt(13)
-        
-        // const hashedPassword = await bcryptjs.hash(password, salt)
-        
-        // const user = new User({
-        //     username, 
-        //     email, 
-        //     password: hashedPassword , 
-        //     nameUser, 
-        //     addressUser, 
-        //     phoneUser 
-        // });
-
-        // const newUser = await User.create(user)
-
-        // res.status(201).json({ newUser })
-        
+     
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -67,7 +41,7 @@ exports.loginUser = async (req, res) => {
             payload,
             process.env.SECRET_KEY,
             {
-                expiresIn: '1m',
+                expiresIn: '5m',
             },
             (error, token) => {
                 if (error) throw error;
@@ -95,15 +69,6 @@ exports.updateUserById = async (req, res) => {
 
          const user = req.body
 
-        //  const { 
-        //      username, 
-        //      email, 
-        //      password, 
-        //      nameUser, 
-        //      addressUser, 
-        //      phoneUser 
-        //  } = req.body
-
         if (user.password) {
 
             const { password } = user;
@@ -116,15 +81,6 @@ exports.updateUserById = async (req, res) => {
         }
 
         const updatedUser = await User.findByIdAndUpdate(idUser, user, { new: true })
-        
-        // const updatedUser = await User.findByIdAndUpdate(idUser, {
-        //      username,
-        //      email,
-        //      password: hashedPassword,
-        //      nameUser,
-        //      addressUser,
-        //      phoneUser
-        // }, { new: true })
 
         res.json({ updatedUser })
     } catch (error) {
