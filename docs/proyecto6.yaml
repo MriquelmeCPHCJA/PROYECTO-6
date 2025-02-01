@@ -1,0 +1,550 @@
+openapi: 3.0.0
+info:
+  title: PROYECTO-6 (MongoDB) RENDER
+  description: En este proyecto, el objetivo fue construir una aplicación backend que administre la autenticación y autorización de los usuarios. Este es un componente fundamental en la mayoría de las aplicaciones web, y este proyecto me ofrecio la oportunidad de aprender sobre las mejores prácticas y las herramientas disponibles para manejar estas tareas, como los JWT (JSON Web Tokens).
+
+    Además, utilizarás MongoDB y Mongoose para la persistencia de datos, y construí
+    un modelo de "usuario", un modelo de "producto" y un modelo de "categorias". Se
+    pueden enlazar (productos, categorias). Estos modelos estarán relacionados entre
+    sí a través de MongoDB. Tambien está el registro de Usuarios, su modificación,
+    verificación y actualización. Adicionalmente para temas de pruebas también
+    fueron agregados las consultas de usuarios y eliminación de usuarios.
+
+    El proyecto posée una estructura de carpetas clara con controladores, modelos,
+    rutas y middleware. Finalmente, se desplegó la aplicación a través de render.com
+    y la base de datos en MongoDB Atlas.
+  contact:
+    email: marcelo.riquelme@cph-cja.cl
+  version: '1.0'
+servers:
+- url: https://proyecto-6-ueou.onrender.com/api
+  variables: {}
+paths:
+  /category/create-category:
+    post:
+      tags:
+      - Category Product
+      summary: Create Category
+      operationId: CreateCategory
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateCategoryRequest'
+              - example:
+                  name: Vestuario Mujer
+                  description: Vestidos, pantalones, chaquetas, poleras, polerones, zapatos, etc
+            example:
+              name: Vestuario Mujer
+              description: Vestidos, pantalones, chaquetas, poleras, polerones, zapatos, etc
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /category/all-category:
+    get:
+      tags:
+      - Category Product
+      summary: Get All Category
+      operationId: GetAllCategory
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /category/category/{id}:
+    get:
+      tags:
+      - Category Product
+      summary: Get Category By Id
+      operationId: GetCategoryById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único de la categoria.
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /category/update-category/{id}:
+    put:
+      tags:
+      - Category Product
+      summary: Update Category By Id
+      operationId: UpdateCategoryById
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único de la categoria.      
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateCategoryByIdRequest'
+              - example:
+                  name: Tecnología
+                  description: Computadores, portátiles, Tablet, monitores, partes y piezas
+            example:
+              name: Tecnología
+              description: Computadores, portátiles, Tablet, monitores, partes y piezas
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /category/delete-category/{id}:
+    delete:
+      tags:
+      - Category Product
+      summary: Delete Category By Id
+      operationId: DeleteCategoryById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único de la categoria.
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/create-product:
+    post:
+      tags:
+      - Products
+      summary: Create Product
+      operationId: CreateProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateProductRequest'
+              - example:
+                  nameProduct: HP Probook 450
+                  priceProduct: 720000
+                  quantityProduct: 15
+                  descriptionProduct: Portatil Hp Probook 450, i5 3.2Ghz, 8Gb Ram, 1Tb SSD, pantalla 14''
+                  categoryProduct:
+                  - 6799130e330f0296092a3039
+            example:
+              nameProduct: HP Probook 450
+              priceProduct: 720000
+              quantityProduct: 15
+              descriptionProduct: Portatil Hp Probook 450, i5 3.2Ghz, 8Gb Ram, 1Tb SSD, pantalla 14''
+              categoryProduct:
+              - 6799130e330f0296092a3039
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/all-products:
+    get:
+      tags:
+      - Products
+      summary: Get All Product
+      operationId: GetAllProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/product/{id}:
+    get:
+      tags:
+      - Products
+      summary: Get Product By Id
+      operationId: GetProductById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del producto.      
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/update-product/{id}:
+    put:
+      tags:
+      - Products
+      summary: Update Product By Id
+      operationId: UpdateProductById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del producto.      
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateProductByIdRequest'
+              - example:
+                  priceProduct: 390000
+            example:
+              priceProduct: 390000
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/delete-product/{id}:
+    delete:
+      tags:
+      - Products
+      summary: Delete Product By Id
+      operationId: DeleteProductById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del producto.
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/register:
+    post:
+      tags:
+      - Users
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterUserRequest'
+              - example:
+                  username: omeyer
+                  email: omeyer@gmail.com
+                  password: '123456'
+                  nameUser:
+                  - Aleli
+                  - Riquelme
+                  addressUser:
+                  - Av. Vicuña Mackenna Pte 6180
+                  - La Florida
+                  - Santiago
+                  - Codigo Postal 87200
+                  phoneUser:
+                  - 951926287
+            example:
+              username: omeyer
+              email: omeyer@gmail.com
+              password: '123456'
+              nameUser:
+              - Aleli
+              - Riquelme
+              addressUser:
+              - Av. Vicuña Mackenna Pte 6180
+              - La Florida
+              - Santiago
+              - Codigo Postal 87200
+              phoneUser:
+              - 951926287
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/login:
+    post:
+      tags:
+      - Users
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginUserRequest'
+              - example:
+                  username: aleriquelme
+                  password: '123456'
+            example:
+              username: aleriquelme
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/verify-user:
+    get:
+      tags:
+      - Users
+      summary: Verify User
+      operationId: VerifyUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /users/update-user/{id}:
+    put:
+      tags:
+      - Users
+      summary: Update User
+      operationId: UpdateUser
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del usuario.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateUserRequest'
+              - example:
+                  nameUser:
+                  - Frevia
+                  - Bernal
+            example:
+              nameUser:
+              - Frevia
+              - Bernal
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/get-users:
+    get:
+      tags:
+      - Users
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/delete-user/{id}:
+    delete:
+      tags:
+      - Users
+      summary: Delete User By Id
+      operationId: DeleteUserById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Identificador único del usuario.
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    CreateCategoryRequest:
+      title: CreateCategoryRequest
+      required:
+      - name
+      - description
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      example:
+        name: Vestuario Mujer
+        description: Vestidos, pantalones, chaquetas, poleras, polerones, zapatos, etc
+    UpdateCategoryByIdRequest:
+      title: UpdateCategoryByIdRequest
+      required:
+      - name
+      - description
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      example:
+        name: Tecnología
+        description: Computadores, portátiles, Tablet, monitores, partes y piezas
+    CreateProductRequest:
+      title: CreateProductRequest
+      required:
+      - nameProduct
+      - priceProduct
+      - quantityProduct
+      - descriptionProduct
+      - categoryProduct
+      type: object
+      properties:
+        nameProduct:
+          type: string
+        priceProduct:
+          type: integer
+          format: int32
+        quantityProduct:
+          type: integer
+          format: int32
+        descriptionProduct:
+          type: string
+        categoryProduct:
+          type: array
+          items:
+            type: string
+          description: ''
+      example:
+        nameProduct: HP Probook 450
+        priceProduct: 720000
+        quantityProduct: 15
+        descriptionProduct: Portatil Hp Probook 450, i5 3.2Ghz, 8Gb Ram, 1Tb SSD, pantalla 14''
+        categoryProduct:
+        - 6799130e330f0296092a3039
+    UpdateProductByIdRequest:
+      title: UpdateProductByIdRequest
+      required:
+      - priceProduct
+      type: object
+      properties:
+        priceProduct:
+          type: integer
+          format: int32
+      example:
+        priceProduct: 390000
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - username
+      - email
+      - password
+      - nameUser
+      - addressUser
+      - phoneUser
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        nameUser:
+          type: array
+          items:
+            type: string
+          description: ''
+        addressUser:
+          type: array
+          items:
+            type: string
+          description: ''
+        phoneUser:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: ''
+      example:
+        username: omeyer
+        email: omeyer@gmail.com
+        password: '123456'
+        nameUser:
+        - Aleli
+        - Riquelme
+        addressUser:
+        - Av. Vicuña Mackenna Pte 6180
+        - La Florida
+        - Santiago
+        - Codigo Postal 87200
+        phoneUser:
+        - 951926287
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: aleriquelme
+        password: '123456'
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+      - nameUser
+      type: object
+      properties:
+        nameUser:
+          type: array
+          items:
+            type: string
+          description: ''
+      example:
+        nameUser:
+        - Frevia
+        - Bernal
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Category Product
+- name: Products
+- name: Users

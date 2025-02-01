@@ -40,6 +40,9 @@ exports.updateProductById = async (req, res) => {
         const idProducto = req.params.id;
 
         const product =  req.body;
+
+        if (!product.categoryProduct) throw new Error('Debe seleccionar una categoría');
+        
         const updatedProduct = await Product.findByIdAndUpdate(idProducto, product, { new: true }).populate('categoryProduct');
         
         res.json({updatedProduct});
