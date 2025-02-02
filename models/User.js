@@ -18,38 +18,45 @@ const UserSchema = mongoose.Schema({
         required: function(){return this.isNew},
         trim: true
     },
-    nameUser: [ {
-        type: String,
-        required: function(){return this.isNew},
-        trim: true
-    }, 
-    {
-        type: String,
-        required: function(){return this.isNew},
-        trim: true
-    }],
-    addressUser: [ { 
-        type: String 
-    } ,
-    { 
-        type: String 
-    } , 
-    { 
-        type: String 
-    } , 
-    { 
-        type: String 
-    } , 
-    { 
-        type: String 
-    } ],
-    phoneUser: [{ 
-        type: Number
-    }, 
-    { 
+    nameUser:  {
+        firstname: {
+            type: String,
+            required: function(){return this.isNew},
+            trim: true
+        },
+        lastname: {
+            type: String,
+            required: function(){return this.isNew},
+            trim: true
+        }
+    },
+    addressUser: { 
+        street1: { 
+            type: String 
+        } ,
+        streer2:{ 
+            type: String 
+        } , 
+        state:{ 
+            type: String 
+        } , 
+        city: { 
+            type: String 
+        } , 
+        zip:{ 
+            type: String 
+        }
+    },
+    phoneUser: {
+        phone1:{ 
+            type: Number
+        }, 
+        phone2:{ 
         type: Number 
-    }]
-}, { timestamps: true }
+        }
+    }
+},
+{timestamps: true}
 );
 
 const User = mongoose.model('User', UserSchema);
