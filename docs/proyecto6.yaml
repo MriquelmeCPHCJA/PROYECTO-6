@@ -82,13 +82,13 @@ paths:
       - Category Product
       summary: Update Category By Id
       operationId: UpdateCategoryById
-      parameters: 
+      parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
-          description: Identificador único de la categoria.      
+          description: Identificador único de la categoria.
       requestBody:
         description: ''
         content:
@@ -115,12 +115,13 @@ paths:
       summary: Delete Category By Id
       operationId: DeleteCategoryById
       parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-          description: Identificador único de la categoria.
+      - name: id
+        in: path
+        description: Identificador único de la categoria.
+        required: true
+        style: simple
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -184,7 +185,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Identificador único del producto.      
+          description: Identificador único del producto.
       responses:
         '200':
           description: ''
@@ -196,13 +197,13 @@ paths:
       - Products
       summary: Update Product By Id
       operationId: UpdateProductById
-      parameters:
+      parameters: 
         - in: path
           name: id
           required: true
           schema:
             type: string
-          description: Identificador único del producto.      
+          description: Identificador único del producto.
       requestBody:
         description: ''
         content:
@@ -226,7 +227,7 @@ paths:
       - Products
       summary: Delete Product By Id
       operationId: DeleteProductById
-      parameters:
+      parameters: 
         - in: path
           name: id
           required: true
@@ -253,33 +254,35 @@ paths:
               allOf:
               - $ref: '#/components/schemas/RegisterUserRequest'
               - example:
-                  username: omeyer
-                  email: omeyer@gmail.com
+                  username: ariquelme
+                  email: aleli@gmail.com
                   password: '123456'
                   nameUser:
-                  - Aleli
-                  - Riquelme
+                    firstname: Aleli
+                    lastname: Riquelme
                   addressUser:
-                  - Av. Vicuña Mackenna Pte 6180
-                  - La Florida
-                  - Santiago
-                  - Codigo Postal 87200
+                    street1: Av. Vicuña Mackenna Pte 6180
+                    street2: Depto 111-D
+                    state: La Florida
+                    city: Santiago
+                    zip: '87200'
                   phoneUser:
-                  - 951926287
+                    phone1: 951926287
             example:
-              username: omeyer
-              email: omeyer@gmail.com
+              username: ariquelme
+              email: aleli@gmail.com
               password: '123456'
               nameUser:
-              - Aleli
-              - Riquelme
+                firstname: Aleli
+                lastname: Riquelme
               addressUser:
-              - Av. Vicuña Mackenna Pte 6180
-              - La Florida
-              - Santiago
-              - Codigo Postal 87200
+                street1: Av. Vicuña Mackenna Pte 6180
+                street2: Depto 111-D
+                state: La Florida
+                city: Santiago
+                zip: '87200'
               phoneUser:
-              - 951926287
+                phone1: 951926287
         required: true
       responses:
         '200':
@@ -347,13 +350,37 @@ paths:
               allOf:
               - $ref: '#/components/schemas/UpdateUserRequest'
               - example:
+                  username: mriquelme
+                  email: mriquelme@gmail.com
+                  password: '987654321'
                   nameUser:
-                  - Frevia
-                  - Bernal
+                    firstname: Marcelo
+                    lastname: Riquelme Araneda
+                  addressUser:
+                    street1: Av. Vicuña Mackenna Ote 6180
+                    street2: Depto 808-D
+                    state: La Florida
+                    city: Santiago
+                    zip: '87200'
+                  phoneUser:
+                    phone1: 951926287
+                    phone2: 225656725
             example:
+              username: mriquelme
+              email: mriquelme@gmail.com
+              password: '987654321'
               nameUser:
-              - Frevia
-              - Bernal
+                firstname: Marcelo
+                lastname: Riquelme Araneda
+              addressUser:
+                street1: Av. Vicuña Mackenna Ote 6180
+                street2: Depto 808-D
+                state: La Florida
+                city: Santiago
+                zip: '87200'
+              phoneUser:
+                phone1: 951926287
+                phone2: 225656725
         required: true
       responses:
         '200':
@@ -383,7 +410,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
           description: Identificador único del usuario.
       responses:
         '200':
@@ -481,35 +508,77 @@ components:
         password:
           type: string
         nameUser:
-          type: array
-          items:
-            type: string
-          description: ''
+          $ref: '#/components/schemas/NameUser'
         addressUser:
-          type: array
-          items:
-            type: string
-          description: ''
+          $ref: '#/components/schemas/AddressUser'
         phoneUser:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: ''
+          $ref: '#/components/schemas/PhoneUser'
       example:
-        username: omeyer
-        email: omeyer@gmail.com
+        username: ariquelme
+        email: aleli@gmail.com
         password: '123456'
         nameUser:
-        - Aleli
-        - Riquelme
+          firstname: Aleli
+          lastname: Riquelme
         addressUser:
-        - Av. Vicuña Mackenna Pte 6180
-        - La Florida
-        - Santiago
-        - Codigo Postal 87200
+          street1: Av. Vicuña Mackenna Pte 6180
+          street2: Depto 111-D
+          state: La Florida
+          city: Santiago
+          zip: '87200'
         phoneUser:
-        - 951926287
+          phone1: 951926287
+    NameUser:
+      title: NameUser
+      required:
+      - firstname
+      - lastname
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+      example:
+        firstname: Aleli
+        lastname: Riquelme
+    AddressUser:
+      title: AddressUser
+      required:
+      - street1
+      - street2
+      - state
+      - city
+      - zip
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        state:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+      example:
+        street1: Av. Vicuña Mackenna Pte 6180
+        street2: Depto 111-D
+        state: La Florida
+        city: Santiago
+        zip: '87200'
+    PhoneUser:
+      title: PhoneUser
+      required:
+      - phone1
+      type: object
+      properties:
+        phone1:
+          type: integer
+          format: int32
+      example:
+        phone1: 951926287
     LoginUserRequest:
       title: LoginUserRequest
       required:
@@ -527,18 +596,58 @@ components:
     UpdateUserRequest:
       title: UpdateUserRequest
       required:
+      - username
+      - email
+      - password
       - nameUser
+      - addressUser
+      - phoneUser
       type: object
       properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
         nameUser:
-          type: array
-          items:
-            type: string
-          description: ''
+          $ref: '#/components/schemas/NameUser'
+        addressUser:
+          $ref: '#/components/schemas/AddressUser'
+        phoneUser:
+          $ref: '#/components/schemas/PhoneUser1'
       example:
+        username: mriquelme
+        email: mriquelme@gmail.com
+        password: '987654321'
         nameUser:
-        - Frevia
-        - Bernal
+          firstname: Marcelo
+          lastname: Riquelme Araneda
+        addressUser:
+          street1: Av. Vicuña Mackenna Ote 6180
+          street2: Depto 808-D
+          state: La Florida
+          city: Santiago
+          zip: '87200'
+        phoneUser:
+          phone1: 951926287
+          phone2: 225656725
+    PhoneUser1:
+      title: PhoneUser1
+      required:
+      - phone1
+      - phone2
+      type: object
+      properties:
+        phone1:
+          type: integer
+          format: int32
+        phone2:
+          type: integer
+          format: int32
+      example:
+        phone1: 951926287
+        phone2: 225656725
   securitySchemes:
     bearer:
       type: http
