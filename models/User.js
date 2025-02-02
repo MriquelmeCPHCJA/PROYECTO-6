@@ -34,7 +34,7 @@ const UserSchema = mongoose.Schema({
         street1: { 
             type: String 
         } ,
-        streer2:{ 
+        street2:{ 
             type: String 
         } , 
         state:{ 
