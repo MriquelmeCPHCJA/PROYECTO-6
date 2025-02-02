@@ -150,37 +150,43 @@ Body:
         tipo: String,
         requerido
     },
-    nameUser: [ {
-        tipo: String,
-        requerido
-    }, 
-    {
-        tipo: String,
-        requerido
-    }],
+    nameUser:  {
+        firstname: {
+            type: String,
+            requerido
+        },
+        lastname: {
+            type: String,
+            requerido
+        }
+    },
 
-    addressUser: [ { 
-        tipo: String,
-    } ,
-    { 
-       tipo: String,
-    } , 
-    { 
-        tipo: String,
-    } , 
-    { 
-       tipo: String,
-    } , 
-    { 
-       tipo: String,
-    } ],
+    addressUser: { 
+        street1: { 
+            type: String 
+        } ,
+        streer2:{ 
+            type: String 
+        } , 
+        state:{ 
+            type: String 
+        } , 
+        city: { 
+            type: String 
+        } , 
+        zip:{ 
+            type: String 
+        }
+    },
 
-    phoneUser: [{ 
-       tipo: String,
-    }, 
-    { 
-        tipo: String,
-    }]
+    phoneUser: {
+        phone1:{ 
+            type: Number
+        }, 
+        phone2:{ 
+        type: Number 
+        }
+    }
 ```
 - `POST /api/users/login` - Iniciar sesión.
 ```
@@ -206,46 +212,57 @@ Params:
 Body: (Puede omitir uno o varios valores en la actualización)
     username: {
         tipo: String,
+        requerido
         único
     },
 
     email: {
         tipo: String,
+        requerido
         único
     },
 
     password: {
         tipo: String,
+        requerido
     },
-    nameUser: [ {
-        tipo: String,
-    }, 
-    {
-        tipo: String,
-    }],
+    nameUser:  {
+        firstname: {
+            type: String,
+            requerido
+        },
+        lastname: {
+            type: String,
+            requerido
+        }
+    },
 
-    addressUser: [ { 
-        tipo: String,
-    } ,
-    { 
-       tipo: String,
-    } , 
-    { 
-        tipo: String,
-    } , 
-    { 
-       tipo: String,
-    } , 
-    { 
-       tipo: String,
-    } ],
+    addressUser: { 
+        street1: { 
+            type: String 
+        } ,
+        streer2:{ 
+            type: String 
+        } , 
+        state:{ 
+            type: String 
+        } , 
+        city: { 
+            type: String 
+        } , 
+        zip:{ 
+            type: String 
+        }
+    },
 
-    phoneUser: [{ 
-       tipo: String,
-    }, 
-    { 
-        tipo: String,
-    }]
+    phoneUser: {
+        phone1:{ 
+            type: Number
+        }, 
+        phone2:{ 
+        type: Number 
+        }
+    }
 
 ```
 
