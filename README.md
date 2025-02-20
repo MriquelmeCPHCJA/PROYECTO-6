@@ -98,7 +98,7 @@ El proyecto posée una estructura de carpetas clara con controladores, modelos, 
 │         ├── productRoutes.js
 │         └── userRoutes.js
 │
-├── 📂 routes
+├── 📂 docs
 │         └── proyecto6.yaml
 │
 ├── 📜 .env
